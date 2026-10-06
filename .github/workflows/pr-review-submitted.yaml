@@ -3,7 +3,7 @@ jobs:
     permissions: {}
     runs-on: ubuntu-latest
     steps:
-      - uses: JoshuaKGoldberg/pr-review-labels-action@4ef8743729b77c6eff5dc920857fc102e4036aa3
+      - uses: JoshuaKGoldberg/pr-review-labels-action@5b3bfb1bfba9a47964590b54023f0e2e2ba13d9b
 
 name: PR Review Submitted
 
