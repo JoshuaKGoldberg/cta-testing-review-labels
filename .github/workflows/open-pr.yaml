@@ -1,0 +1,24 @@
+# Test helper: opens PRs authored by github-actions[bot],
+# so that the repository owner is able to request changes on them.
+name: Open PR
+
+on:
+  workflow_dispatch:
+    inputs:
+      head:
+        required: true
+      title:
+        required: true
+
+permissions:
+  pull-requests: write
+
+jobs:
+  open_pr:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          HEAD: ${{ inputs.head }}
+          TITLE: ${{ inputs.title }}
+        run: gh api "repos/$GITHUB_REPOSITORY/pulls" -f head="$HEAD" -f base=main -f title="$TITLE" -f body="Test PR for JoshuaKGoldberg/create-typescript-app#633." --jq .html_url
