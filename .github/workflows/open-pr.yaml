@@ -21,4 +21,4 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           HEAD: ${{ inputs.head }}
           TITLE: ${{ inputs.title }}
-        run: gh api "repos/$GITHUB_REPOSITORY/pulls" -f head="$HEAD" -f base=main -f title="$TITLE" -f body="Test PR for JoshuaKGoldberg/create-typescript-app#633." --jq .html_url
+        run: gh api "repos/$GITHUB_REPOSITORY/pulls" -f head="$HEAD" -f base=main -F maintainer_can_modify=false -f title="$TITLE" -f body="Test PR for JoshuaKGoldberg/create-typescript-app#633." --jq .html_url

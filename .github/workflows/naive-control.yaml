@@ -1,0 +1,21 @@
+# Test control: the single-workflow approach from create-typescript-app#633.
+# Expected to fail on PRs from forks, because their pull_request_review token is read-only.
+name: Naive Control
+
+on:
+  pull_request_review:
+    types:
+      - submitted
+
+permissions:
+  pull-requests: write
+
+jobs:
+  naive_control:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/labels" --silent -f "labels[]=control: naive"
