@@ -17,4 +17,5 @@ jobs:
       - env:
           GH_TOKEN: ${{ github.token }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
-        run: gh api "repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/labels" --silent -f "labels[]=control: naive"
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/labels" --silent -f "labels[]=control: naive"
