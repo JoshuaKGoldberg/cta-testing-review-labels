@@ -3,7 +3,14 @@ jobs:
     permissions: {}
     runs-on: ubuntu-latest
     steps:
-      - uses: JoshuaKGoldberg/pr-review-labels-action@fc1cc3089bf2c523bd2b04f0955016c9e5c5e3b7
+      - env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REVIEW_ID: ${{ github.event.review.id }}
+        run: echo "{\"pullRequest\":$PR_NUMBER,\"review\":$REVIEW_ID}" > pr-review-labels-record.json
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          archive: false
+          path: pr-review-labels-record.json
 
 name: PR Review Submitted
 
